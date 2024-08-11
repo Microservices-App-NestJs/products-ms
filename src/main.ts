@@ -2,7 +2,6 @@ import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { Logger, ValidationPipe } from '@nestjs/common';
 import { envs } from './config/envs';
-//import * as morgan from 'morgan';
 import { MicroserviceOptions, Transport } from '@nestjs/microservices';
 
 async function bootstrap() {
@@ -22,7 +21,6 @@ async function bootstrap() {
       forbidNonWhitelisted: true,
     }),
   );
-  // app.use(morgan('dev'));
   await app.listen();
   logger.log(`Products Microservice running on port: ${envs.port}`);
 }
