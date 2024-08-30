@@ -1,7 +1,7 @@
 import { HttpStatus, Injectable, Logger, OnModuleInit } from '@nestjs/common';
 import { CreateProductDto } from './dto/create-product.dto';
 import { UpdateProductDto } from './dto/update-product.dto';
-import { PrismaClient, Product } from '@prisma/client';
+import { PrismaClient } from '@prisma/client';
 import { PaginationDto } from 'src/common/dto/pagination.dto';
 import { RpcException } from '@nestjs/microservices';
 
@@ -39,7 +39,7 @@ export class ProductsService extends PrismaClient implements OnModuleInit {
   }
 
   async findOne(id: number) {
-    const product: Product = await this.product.findFirst({
+    const product = await this.product.findFirst({
       where: {
         id,
         available: true,
@@ -68,7 +68,7 @@ export class ProductsService extends PrismaClient implements OnModuleInit {
   async remove(id: number) {
     await this.findOne(id);
 
-    const product: Product = await this.product.update({
+    const product = await this.product.update({
       where: { id },
       data: {
         available: false,
